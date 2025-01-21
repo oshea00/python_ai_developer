@@ -1,2 +1,6 @@
 Write python code to create a REPL for simple math operations like addition, subtraction, multiplication, and division.
+Provide basic instructions when the repl starts, including how to exit.
 Allow for use of built-in python math functions and constants by importing the math library.
+Provide the ability to store results in variables that can be referenced in calculations.
+implement command line parameter "-c" that will accept a calculation expression and return the result on stdout and exit the program.
+

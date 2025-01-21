@@ -1,23 +1,16 @@
 research_task:
   description: >
-    Analyze the problem about: {topic}. Find libraries, algorithms, or techniques that
+    1. Analyze the problem about: {topic}. Find libraries, algorithms, or techniques that
     may be relevant to solving the problem.
+    2. Generate the python code that solves the problem.
   expected_output: >
     A summary of libraries, algorithms, and approaches.
   agent: code_researcher
 
-write_code_task:
-  description: >
-    Write Python code that implements the recommendations of the code_researcher.
-    Do not wrap code in '```python' and '```'.
-  expected_output: >
-    Python code that solves the problem.
-    Properly format any explanations as valid python comment syntax.
-  agent: code_writer
-
 test_code_task:
   description: >
-    Test the Python code to ensure it aligns with the problem requirements.
+    1. Analyze the code and generate tests of the intended behaviour.    
+    2. Test the Python code to ensure it aligns with the problem requirements.
   expected_output: >
-    A report on the tests that were chosen and their results, along with suggested fixes.
+    A report on the tests that were generated including along with the results and with suggested fixes.
   agent: code_tester

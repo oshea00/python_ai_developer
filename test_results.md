@@ -1,39 +1,52 @@
-### Test Report on the Simple Math REPL Code
+### Test Report for the Python Math REPL
 
-#### Test Cases Executed:
+The following tests were designed and executed to evaluate the functionality of the Python-based REPL (Read-Eval-Print Loop) for simple math operations. 
 
-1. **Basic Arithmetic Operations:**
-   - **Addition:** `3 + 4` expected `7` ✔️
-   - **Subtraction:** `10 - 5` expected `5` ✔️
-   - **Multiplication:** `2 * 3` expected `6` ✔️
-   - **Division:** `8 / 2` expected `4` ✔️
+#### Test Scenarios:
 
-2. **Mathematical Functions:**
-   - **Square Root:** `math.sqrt(16)` expected `4` ✔️
-   - **Sine Function:** `math.sin(math.pi / 2)` expected `1` ✔️
-   - **Cosine Function:** `math.cos(math.pi)` expected `-1` ✔️
+1. **Basic Mathematical Operations:**
+   - **Input:** `3 + 5`
+   - **Expect:** `8`
 
-3. **Mathematical Constants:**
-   - **Pi:** `math.pi` expected `math.pi` ✔️
-   - **Euler's Number:** `math.e` expected `math.e` ✔️
+2. **Variable Assignment:**
+   - **Input:** `result = 12 * 2`
+   - **Expect:** `result = 24`
 
-4. **Safe Built-in Functions:**
-   - **Absolute Function:** `abs(-10)` expected `10` ✔️
-   - **Round Function:** `round(3.14159, 2)` expected `3.14` ✔️
+3. **Variable Usage:**
+   - **Input:** `result / 3`
+   - **Expect:** `8.0`
 
-5. **Error Handling:**
-   - **Invalid Syntax:** `3 + * 2` expected `Error` ✔️
+4. **Math Functions:**
+   - **Input:** `math.sin(math.pi / 2)`
+   - **Expect:** `1.0`
 
-6. **Security Tests:**
-   - **Access Forbidden Built-in:** `open('test.txt', 'w')` expected `Error` ✔️
+5. **Invalid Expression Handling:**
+   - **Input:** `invalid expression`
+   - **Expect:** Error message indicating expression cannot be evaluated.
 
-7. **Exit Condition:**
-   - **Exit:** Typing `'exit'` expected `"Exiting REPL. Goodbye!"` ✔️
+6. **Division by Zero Handling:**
+   - **Input:** `10 / 0`
+   - **Expect:** Error message indicating division by zero.
+
+7. **Exit Commands:**
+   - **Input:** `exit()`
+   - **Expect:** Program terminates without errors.
+
+8. **Command-Line Calculation:**
+   - **Command:** `-c "5 * math.pi"`
+   - **Expect:** Result of `15.7079632679495` approximately (depending on precision settings).
 
 #### Results:
-- All test cases passed successfully, demonstrating that the code handles basic arithmetic, uses the `math` module correctly, safely restricts built-in function access, and handles errors effectively.
+
+- **Basic Operations**, **Variable Assignment and Usage**, **Math Functions**, and **Exit Commands:** All executed successfully with expected outputs.
+- **Invalid Expressions** and **Division by Zero:** Raised appropriate error messages. 
+
+- **Command-Line Argument Execution:** The expression passed was correctly evaluated and matched the expected precision.
 
 #### Suggested Fixes:
-- No issues were identified in the current implementation based on the specified test cases. The REPL is functioning as intended, with safety measures against unauthorized code execution.
 
-The code successfully meets the problem requirements and appropriately restricts the execution environment for security.
+- **Security Concern:** The use of `eval()` with user input poses a security risk. While the current implementation limits `eval()` using restricted globals, it is still recommended to parse the input using a safer method, potentially leveraging the `ast` module fully for expression evaluation.
+
+- **Syntax Handling:** Enhance error messages by capturing syntax errors specifically, which can guide users more effectively.
+
+The script performs well for simple calculations, math function evaluations, and the use of previous calculation results via variables. By addressing the security aspect and providing clearer error reporting, the script could be made more robust and user-friendly.

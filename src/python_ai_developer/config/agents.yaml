@@ -8,16 +8,6 @@ code_researcher:
     You are an expert in Python development with deep knowledge of libraries 
     and best practices. You excel at researching solutions for complex coding problems.
 
-code_writer:
-  role: >
-    Python Code Writer
-  goal: >
-    Write Python code that implements the solution for the {topic}.
-  backstory: >
-    You are a seasoned Python developer with a knack for crafting clear, 
-    efficient, and maintainable code. Your strength lies in translating research 
-    into high-quality Python code.
-
 code_tester:
   role: >
     Python Code Tester

@@ -1,56 +1,51 @@
-import math  # Import the math library to use mathematical functions and constants
+import math
+import argparse
+
+def evaluate_expression(expression, variables):
+    # Evaluate an expression with access to math functions and previous variables
+    try:
+        # Safely evaluate the expression using eval with limited global and local context
+        result = eval(expression, {"__builtins__": None, "math": math}, variables)
+        return result
+    except Exception as e:
+        return f"Error evaluating expression: {e}"
+
+def repl():
+    print("Welcome to the Python Math REPL!")
+    print("Type 'exit()' or 'quit()' to exit.")
+    print("You can use basic math operations, store results in variables, and use math functions.")
+    
+    variables = {}
+    
+    while True:
+        expression = input(">>> ")
+        if expression.lower() in ['exit()', 'quit()']:
+            break
+        
+        if "=" in expression:
+            try:
+                var, expr = [x.strip() for x in expression.split("=", 1)]
+                result = evaluate_expression(expr, variables)
+                variables[var] = result
+                print(f"{var} = {result}")
+            except Exception as e:
+                print(f"Error: {e}")
+        else:
+            result = evaluate_expression(expression, variables)
+            print(result)
 
 
 def main():
-    print("Simple Math REPL (Read-Eval-Print Loop)")
-    print("Type 'exit' to quit")
-    print(
-        "You can use basic math operations (+, -, *, /) and math functions/constants (e.g. math.sqrt, math.pi)"
-    )
-
-    while True:
-        try:
-            # Read user input
-            expression = input("Enter expression: ")
-
-            # Check exit condition
-            if expression.strip().lower() == "exit":
-                print("Exiting REPL. Goodbye!")
-                break
-
-            # Evaluate the expression while allowing usage of the math module
-            # Use eval cautiously with provided context for safety
-            # Only allow built-in functions and math module; no other built-ins
-            allowed_names = {
-                name: getattr(math, name)
-                for name in dir(math)
-                if not name.startswith("__")
-            }
-            allowed_names.update(
-                {"abs": abs, "round": round}
-            )  # Allow well-known safe built-ins
-
-            # Evaluate the expression in a restricted namespace
-            result = eval(expression, {"__builtins__": None}, allowed_names)
-
-            # Print the result
-            print("Result:", result)
-
-        except Exception as e:
-            # Catch any exceptions and print error message
-            print("Error:", str(e))
-
+    parser = argparse.ArgumentParser(description='Simple Math REPL.')
+    parser.add_argument('-c', '--calculate', help='Calculate expression and return result', type=str)
+    args = parser.parse_args()
+    
+    if args.calculate:
+        variables = {}
+        result = evaluate_expression(args.calculate, variables)
+        print(result)
+    else:
+        repl()
 
 if __name__ == "__main__":
     main()
-
-# Explanation
-# This code creates a simple REPL for mathematical operations using Python.
-# - It imports the `math` module to access various mathematical functions and constants.
-# - The loop continuously reads input expressions from the user until the user types 'exit'.
-# - It safely evaluates mathematical expressions using `eval()` with a restricted set of built-in functions, limited to the math module and a few safe built-ins like `abs` and `round`.
-# - Each result or error message is printed to provide feedback to the user immediately.
-
-# Security:
-# - Ensures only safe functions and constants are accessible to `eval()` by restricting the eval environment.
-# - No direct access to dangerous built-ins or arbitrary code execution.

@@ -7,10 +7,6 @@ from python_ai_developer.crew import PythonAiDeveloper
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
-# This main file is intended to be a way for you to run your
-# crew locally, so refrain from adding unnecessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
 def load_problem():
     with open("programming_problem.txt", "r") as file:
         return file.read()
